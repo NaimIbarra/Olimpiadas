@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body class="imgs">
+<header> <h1>Sistema de Hospital</h1> </header>
+<main>
+    <form id="formularioInicioSesion">
+
+    <label for="nombre">Nombre de Usuario:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <label for="email">email</label>
+    <input type="text" name="email" required>
+    <label for="usuario">TipoDeUsuario</label>
+                <input
+                  type="text"
+                  multiple
+                  name="emails"
+                  id="emails"
+                  list="drawfemails"
+                  required
+                  size="30" />
+
+                <datalist id="drawfemails">
+                  <option value="Admin">Admin</option>
+                  <option value="Usuario">Usuario</option>
+
+                </datalist> 
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena" required>
+
+    <button type="submit">Iniciar Sesión</button>
+</form>
+</main>
+<footer><p>&copy; 2023 Hospital T2</p></footer>
+<script src="script.js"></script>
+</body>
+</html>

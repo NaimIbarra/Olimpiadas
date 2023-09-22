@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0074d9;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+main {
+    margin-top: 150px; 
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.content {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px; 
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+
+.sidebar {
+    flex: 1;
+    background-color: #ddd;
+    padding: 20px;
+}
+
+footer {
+    background-color: #0074d9;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 1px;
+
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        padding: 10px;
+    }
+
+    nav ul {
+        text-align: center;
+    }
+
+    nav li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    main {
+        flex-direction: column; 
+    }
+
+    .content {
+        margin-bottom: 10px;
+    }
+}
+form{
+    text-align: center;
+}
+#refs{
+    text-align: center;
+}
+.imgs{
+    background-image:url("https://cdn-3.expansion.mx/dims4/default/fb1c0bc/2147483647/strip/true/crop/1920x1080+0+0/resize/1800x1013!/format/webp/quality/80/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fbd%2F65%2Ff5fa5e9947c4b6b7f59082de91e5%2Fdoctores-metaverso.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
