@@ -14,8 +14,17 @@ const pool = new pg.Pool({
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(express.json()); // Middleware para analizar el cuerpo de las solicitudes JSON
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/inicio-sesion.html');
+  });
+  app.get('/script-in-sesion.js', (req, res) => {
+    res.sendFile(__dirname + '/script-in-sesion.js', {
+      headers: {
+        'Content-Type': 'text/javascript'
+      }
+    });
   });
   app.get("/a.html", (req, res) => {
     res.sendFile(__dirname + '/a.html');
@@ -35,25 +44,25 @@ app.get('/', (req, res) => {
     });
   });
   // Ruta para validar las credenciales de inicio de sesión
-app.post('/validar-inicio-sesion', (req, res) => {
-  const { email, contrasena } = req.body; // Obtén el correo electrónico y la contraseña del cuerpo de la solicitud
-
-  // Realiza una consulta a la base de datos para verificar las credenciales
-  pool.query('SELECT * FROM usuarios WHERE correo = naimibarra@gmail.com AND contraseña = tuculito', [email, contrasena], (error, result) => {
+  app.post('/validar-inicio-sesion', (req, res) => {
+    const { email, contrasena } = req.body; // Obtén el correo electrónico y la contraseña del cuerpo de la solicitud
+  
+    // Realiza una consulta a la base de datos para verificar las credenciales
+    pool.query('SELECT * FROM usuarios WHERE correo = $1 AND contraseña = $2', [email, contrasena], (error, result) => {
       if (error) {
-          console.error('Error al consultar la base de datos:', error);
-          res.status(500).json({ error: 'Ocurrió un error al verificar las credenciales.' });
+        console.error('Error al consultar la base de datos:', error);
+        res.status(500).json({ error: 'Ocurrió un error al verificar las credenciales.' });
       } else {
-          // Verifica si se encontró un usuario con las credenciales proporcionadas
-          if (result.rows.length > 0) {
-              res.json({ mensaje: 'Credenciales válidas. Inicio de sesión exitoso.' });
-          } else {
-              res.status(401).json({ error: 'Credenciales inválidas. Inicio de sesión fallido.' });
-          }
+        // Verifica si se encontró un usuario con las credenciales proporcionadas
+        if (result.rows.length > 0) {
+            // Credenciales válidas, envía una respuesta JSON al cliente
+            res.json({ mensaje: 'Credenciales válidas. Inicio de sesión exitoso.' });
+        } else {
+            res.status(401).json({ error: 'Credenciales inválidas. Inicio de sesión fallido.' });
+        }
       }
+    });
   });
-});
-
 // Ruta de prueba para consultar datos de la base de datos
 app.get('/consultar-datos', (req, res) => {
   // Ejemplo de consulta a la base de datos
